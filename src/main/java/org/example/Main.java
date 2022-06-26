@@ -4,50 +4,55 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
-    private static final int arraySize = 1000;
+    private static final int arraySize = 10;
+    private static final int bound = 1000;
 
     public static void main(String[] args) {
         int[] randomArray = new int[arraySize];
-        for (int i = 0; i< randomArray.length; i++){
-            randomArray[i] = (int) (Math.random()*100);
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = new Random().nextInt(bound);
         }
-        quickSort(randomArray, 0, randomArray.length-1);
+        quickSort(randomArray);
         printArray(randomArray);
     }
 
-    private static void quickSort(int[] array, int leftBorder, int rightBorder){
-        if (leftBorder >= rightBorder){
+    private static void quickSort(int[] array) {
+        quickSort(array, 0, array.length - 1);
+    }
+
+    private static void quickSort(int[] array, int firstElement, int lastElement) {
+        if (firstElement >= lastElement) {
             return;
         }
-        int randomElement = new Random().nextInt(rightBorder - leftBorder) + leftBorder;
-        swap(array, randomElement, rightBorder);
-        randomElement = array[rightBorder];
 
-        int leftPointer = leftBorder;
-        int rightPointer = rightBorder-1;
+        int randomElementPosition = new Random().nextInt(lastElement - firstElement) + firstElement;
 
-        while (leftPointer < rightPointer){
-            while (array[leftPointer] <= randomElement && leftPointer < rightPointer){
+        swap(array, randomElementPosition, lastElement);
+        int randomElement = array[lastElement];
+
+        int leftPointer = firstElement;
+        int rightPointer = lastElement - 1;
+
+        while (leftPointer < rightPointer) {
+            while (array[leftPointer] <= randomElement && leftPointer < rightPointer) {
                 leftPointer++;
             }
-
-            while (array[rightPointer] >= randomElement && leftPointer < rightPointer){
+            while (array[rightPointer] >= randomElement && leftPointer < rightPointer) {
                 rightPointer--;
             }
             swap(array, leftPointer, rightPointer);
         }
-        if(array[leftPointer] > randomElement) {
-            swap(array, leftPointer, rightBorder);
+        if (array[leftPointer] > randomElement) {
+            swap(array, leftPointer, lastElement);
+        } else {
+            leftPointer = lastElement;
         }
-        else {
-            leftPointer = rightBorder;
-        }
-        quickSort(array, leftBorder, leftPointer-1);
-        quickSort(array, leftPointer+1, rightBorder);
+        quickSort(array, firstElement, leftPointer - 1);
+        quickSort(array, leftPointer + 1, lastElement);
     }
 
-    private static void swap(int[] array, int position1, int position2){
-        if (position1 == position2){
+    private static void swap(int[] array, int position1, int position2) {
+        if (position1 == position2) {
             return;
         }
         int buffer = array[position1];

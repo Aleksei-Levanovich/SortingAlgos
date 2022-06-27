@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -8,19 +7,16 @@ public class Main {
     private static final int bound = 1000;
 
     public static void main(String[] args) {
-        int[] randomArray = new int[arraySize];
-        for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = new Random().nextInt(bound);
-        }
+        Integer[] randomArray = createRandomIntArray(arraySize);
         quickSort(randomArray);
         printArray(randomArray);
     }
 
-    private static void quickSort(int[] array) {
+    private static void quickSort(Integer[] array) {
         quickSort(array, 0, array.length - 1);
     }
 
-    private static void quickSort(int[] array, int firstElement, int lastElement) {
+    private static void quickSort(Integer[] array, int firstElement, int lastElement) {
         if (firstElement >= lastElement) {
             return;
         }
@@ -51,7 +47,7 @@ public class Main {
         quickSort(array, leftPointer + 1, lastElement);
     }
 
-    private static void swap(int[] array, int position1, int position2) {
+    private static void swap(Integer[] array, int position1, int position2) {
         if (position1 == position2) {
             return;
         }
@@ -60,9 +56,17 @@ public class Main {
         array[position2] = buffer;
     }
 
-    private static void printArray(int[] numbers) {
+    private static void printArray(Integer[] numbers) {
         for (int number : numbers) {
             System.out.println(number);
         }
+    }
+
+    private static Integer[] createRandomIntArray(int arraySize){
+        Integer[] randomArray = new Integer[arraySize];
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = new Random().nextInt(bound);
+        }
+        return randomArray;
     }
 }

@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.Random;
 
+import static org.example.Functions.printArray;
+import static org.example.algos.BubbleSort.bubbleSort;
 import static org.example.algos.QuickSort.quickSort;
 
 public class Main {
@@ -10,19 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
         int[] randomArray = createRandomIntArray();
-        quickSort(randomArray);
-        printArray(randomArray);
+        printArray(quickSort(randomArray));
+        printArray(bubbleSort(randomArray));
     }
 
-
-
-    private static void printArray(int[] numbers) {
-        for (int number : numbers) {
-            System.out.println(number);
-        }
-    }
-
-    private static int[] createRandomIntArray(){
+    private static int[] createRandomIntArray() {
         int[] randomArray = new int[Main.arraySize];
         for (int i = 0; i < randomArray.length; i++) {
             randomArray[i] = new Random().nextInt(bound);

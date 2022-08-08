@@ -2,9 +2,12 @@ package org.example.algos;
 
 import java.util.Random;
 
+import static org.example.Functions.swap;
+
 public class QuickSort {
-    public static void quickSort(int[] array) {
+    public static int[] quickSort(int[] array) {
         quickSort(array, 0, array.length - 1);
+        return array;
     }
 
     private static void quickSort(int[] array, int firstElement, int lastElement) {
@@ -36,14 +39,5 @@ public class QuickSort {
         }
         quickSort(array, firstElement, leftPointer - 1);
         quickSort(array, leftPointer + 1, lastElement);
-    }
-
-    private static void swap(int[] array, int position1, int position2) {
-        if (position1 == position2) {
-            return;
-        }
-        int buffer = array[position1];
-        array[position1] = array[position2];
-        array[position2] = buffer;
     }
 }

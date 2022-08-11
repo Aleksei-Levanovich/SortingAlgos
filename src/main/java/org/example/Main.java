@@ -3,6 +3,7 @@ package org.example;
 import static org.example.Functions.createRandomIntArray;
 import static org.example.Functions.printArray;
 import static org.example.algos.BubbleSort.bubbleSort;
+import static org.example.algos.MergeSort.mergeSort;
 import static org.example.algos.QuickSort.quickSort;
 
 public class Main {
@@ -17,5 +18,7 @@ public class Main {
         printArray(quickSort(randomArray));
         System.out.println("Bubble Sort:");
         printArray(bubbleSort(randomArray));
+        System.out.println("Merge Sort:");
+        printArray(mergeSort(randomArray));
     }
 }
